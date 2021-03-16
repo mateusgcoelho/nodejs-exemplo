@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous"></script>
+
+    <title>Profile</title>
+</head>
+<body>
+    <main>
+        <div id="wrapper">
+
+        </div>
+    </main>
+
+    <script>
+        let state = {
+            users: [],
+            loading: false,
+        }
+
+        const wrapper = document.getElementById("wrapper");
+
+        axios.get("http://localhost:3333/users")
+            .then(response => {
+                state.users = response.data;
+
+                state.users.map((user) => {
+                    wrapper.innerHTML += `
+                        <ul>
+                            <li>${user.id}</li>
+                            <li>${user.name}</li>
+                            <li>${user.age}</li>
+                        </ul>
+                    `;
+                });
+            });
+
+
+    </script>
+</body>
+</html>
